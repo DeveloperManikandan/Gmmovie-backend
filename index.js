@@ -15,11 +15,14 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
-const corsOption={
-    origin: "http://localhost:3000",
-    Credential:true
-}
-app.use(cors(corsOption));
+const corsOptions = {
+  origin: ['http://localhost:3000', 'https://gmmovie-front.vercel.app'], 
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true, 
+  optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
 
 app.use("/api/v1/user", userRoute);
 app.listen(process.env.PORT,()=>{
